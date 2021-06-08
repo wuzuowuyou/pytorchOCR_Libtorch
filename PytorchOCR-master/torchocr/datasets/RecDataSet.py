@@ -219,8 +219,15 @@ class RecDataLoader:
                     return self.pack(batch_data)
         # deal with last batch
         except StopIteration:
-            batch_data = self.queue_1
-            self.queue_1 = list()
+            # batch_data = self.queue_1
+            # self.queue_1 = list()
+            # return self.pack(batch_data)
+            if len(self.queue_2) > len(self.queue_1):
+                batch_data = self.queue_2
+                self.queue_2 = list()
+            else:
+                batch_data = self.queue_1
+                self.queue_1 = list()
             return self.pack(batch_data)
 
 
